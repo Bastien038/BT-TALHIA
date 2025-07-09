@@ -17,7 +17,14 @@
       align-items: center;
       position: relative;
       overflow-x: hidden;
+      animation: borderGlow 2s ease-in forwards;
     }
+
+    @keyframes borderGlow {
+      0% { box-shadow: 0 0 0px transparent; }
+      100% { box-shadow: 0 0 60px #fff4, 0 0 120px #ff00ff; }
+    }
+
     .ball {
       width: 70px; height: 70px;
       border-radius: 50%;
@@ -30,15 +37,27 @@
       z-index: 1;
       top: 0;
     }
+
     @keyframes roll {
-      0% { transform: translateX(-200px) rotate(0deg);}
-      60% { transform: translateX(0px) rotate(360deg);}
-      100% { transform: translateX(0px) rotate(720deg);}
+      0% { transform: translateX(-200px) rotate(0deg); }
+      60% { transform: translateX(0px) rotate(360deg); }
+      100% { transform: translateX(0px) rotate(720deg); }
     }
+
     @keyframes colorball {
-      0% { filter: hue-rotate(0deg);}
-      100% { filter: hue-rotate(360deg);}
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
     }
+
+    @keyframes spinShrink {
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(-1440deg) scale(0); }
+    }
+
+    .ball-finale {
+      animation: spinShrink 10s ease-in forwards;
+    }
+
     .multicolor-title {
       font-size: 4em;
       font-weight: bold;
@@ -57,10 +76,32 @@
       z-index: 2;
       line-height: 1.1;
     }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    @keyframes openFrame {
+      0% { transform: scaleX(0); opacity: 0; }
+      100% { transform: scaleX(1); opacity: 1; }
+    }
+
+    .frame-entrar {
+      display: inline-block;
+      border: 4px solid #0ff;
+      border-radius: 16px;
+      padding: 12px;
+      transform-origin: center;
+      animation: openFrame 2s ease-in-out forwards;
+      overflow: hidden;
+    }
+
     .entrar-box {
       position: relative;
       z-index: 2;
     }
+
     .entrar-btn {
       font-size: 2em;
       font-weight: bold;
@@ -77,19 +118,19 @@
       filter: drop-shadow(0 0 12px #fff8);
       position: relative;
       z-index: 2;
+      opacity: 0;
     }
+
     .entrar-btn:hover {
       transform: scale(1.08);
       box-shadow: 0 0 40px #fff8, 0 0 100px #0ff6;
     }
+
     @keyframes bordercolor {
-      0% { border-image-source: linear-gradient(90deg, #ff0055, #00ff99, #ff00ff, #ffea00, #a259ff, #ff0055);}
-      100% { border-image-source: linear-gradient(270deg, #ff0055, #00ff99, #ff00ff, #ffea00, #a259ff, #ff0055);}
+      0% { border-image-source: linear-gradient(90deg, #ff0055, #00ff99, #ff00ff, #ffea00, #a259ff, #ff0055); }
+      100% { border-image-source: linear-gradient(270deg, #ff0055, #00ff99, #ff00ff, #ffea00, #a259ff, #ff0055); }
     }
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }
+
     @media (max-width: 600px) {
       .multicolor-title { font-size: 2em; }
       .entrar-btn { font-size: 1.1em; padding: 14px 18px; }
@@ -103,10 +144,30 @@
   <div class="entrar-box">
     <button class="entrar-btn">Entrar</button>
   </div>
-<script>
-  document.querySelector('.entrar-btn').addEventListener('click', function() {
-    window.location.href = "page.html";
-  });
-</script>
+
+  <script>
+    const ball = document.querySelector('.ball');
+    const entrarBox = document.querySelector('.entrar-box');
+    const entrarBtn = document.querySelector('.entrar-btn');
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        ball.classList.add('ball-finale');
+      }, 2500); // après le roulement
+
+      setTimeout(() => {
+        const frame = document.createElement('div');
+        frame.classList.add('frame-entrar');
+        entrarBtn.style.opacity = '1';
+        entrarBox.innerHTML = '';
+        frame.appendChild(entrarBtn);
+        entrarBox.appendChild(frame);
+      }, 12500); // après animation boule
+    });
+
+    entrarBtn.addEventListener('click', function() {
+      window.location.href = "page.html";
+    });
+  </script>
 </body>
-</html>
+  </html>
