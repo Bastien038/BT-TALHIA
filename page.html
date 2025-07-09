@@ -18,6 +18,7 @@
       position: relative;
       overflow-x: hidden;
     }
+
     .multicolor-title {
       font-size: 3.2em;
       font-weight: bold;
@@ -34,10 +35,12 @@
       filter: drop-shadow(0 0 12px #fff8);
       line-height: 1.1;
     }
+
     @keyframes rainbow {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
+
     .services-list {
       margin: 40px 0 50px 0;
       width: 98vw;
@@ -46,6 +49,7 @@
       flex-direction: column;
       gap: 28px;
     }
+
     .service-link {
       display: block;
       font-size: 2em;
@@ -59,24 +63,33 @@
       box-shadow: 0 0 18px #000a;
       border: 2px solid transparent;
       background-clip: padding-box;
-      transition: background 0.2s, border 0.2s, transform 0.2s;
+      transition: background 0.3s, border 0.3s, transform 0.3s;
       position: relative;
       z-index: 1;
     }
+
     .service-link:hover {
-      background: linear-gradient(90deg, #ff0055, #00ff99, #ffea00, #a259ff, #ff00ff, #00eaff, #ff0055);
-      color: #111;
-      border: 2px solid #fff;
       transform: scale(1.04);
-      font-weight: bold;
       box-shadow: 0 0 30px #fff8, 0 0 60px #0ff4;
     }
+
+    .service-link.selected {
+      background: linear-gradient(90deg, #ff0055, #00ff99, #ffea00, #a259ff, #ff00ff, #00eaff, #ff0055);
+      background-size: 400% 400%;
+      color: #111;
+      border: 2px solid #fff;
+      font-weight: bold;
+      animation: rainbow 2s linear infinite alternate;
+      box-shadow: 0 0 30px #fff8, 0 0 60px #0ff4;
+    }
+
     .back-home {
       margin: 40px 0 0 0;
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
     .back-btn {
       font-size: 1.7em;
       font-weight: bold;
@@ -94,15 +107,17 @@
       position: relative;
       z-index: 2;
     }
+
     .back-btn:hover {
       transform: scale(1.06);
       box-shadow: 0 0 30px #fff8, 0 0 80px #0ff6;
     }
+
     @keyframes bordercolor {
       0% { border-image-source: linear-gradient(90deg, #ff0055, #00ff99, #ff00ff, #ffea00, #a259ff, #ff0055);}
       100% { border-image-source: linear-gradient(270deg, #ff0055, #00ff99, #ff00ff, #ffea00, #a259ff, #ff0055);}
     }
-    /* Footer */
+
     .footer {
       width: 100vw;
       position: fixed;
@@ -117,6 +132,7 @@
       background: transparent;
       pointer-events: none;
     }
+
     .footer-content {
       width: 100%;
       display: flex;
@@ -124,35 +140,8 @@
       align-items: flex-end;
       pointer-events: auto;
     }
-    .help-anim {
-      font-size: 1.5em;
-      font-weight: bold;
-      background: linear-gradient(90deg, #ff0055, #00ff99, #ffea00, #a259ff, #ff00ff, #00eaff, #ff0055);
-      background-size: 400% 400%;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rainbow 2s linear infinite alternate, fadeIn 1.5s;
-      cursor: pointer;
-      text-shadow: 0 0 10px #000;
-      border: none;
-      outline: none;
-      padding: 0;
-      margin: 0 0 8px 0;
-      transition: text-shadow 0.2s;
-      white-space: nowrap;
-      position: relative;
-      z-index: 2;
-    }
-    .help-anim:hover {
-      text-shadow: 0 0 20px #fff, 0 0 40px #0ff;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0;}
-      to { opacity: 1;}
-    }
-    .join-anim {
-      font-size: 1.3em;
+
+    .help-anim, .join-anim {
       font-weight: bold;
       background: linear-gradient(270deg, #ff0055, #00ff99, #ffea00, #a259ff, #ff00ff, #00eaff, #ff0055);
       background-size: 400% 400%;
@@ -171,9 +160,19 @@
       position: relative;
       z-index: 2;
     }
-    .join-anim:hover {
+
+    .help-anim { font-size: 1.5em; }
+    .join-anim { font-size: 1.3em; }
+
+    .help-anim:hover, .join-anim:hover {
       text-shadow: 0 0 20px #fff, 0 0 40px #0ff;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+
     @media (max-width: 600px) {
       .multicolor-title { font-size: 1.5em; }
       .services-list { max-width: 99vw; }
@@ -185,16 +184,12 @@
   </style>
 </head>
 <body>
-  <!-- Musique automatique -->
-  </style>
-  </style>
   <audio id="audio1" src="https://files.catbox.moe/0gmkt4.mp3" autoplay></audio>
   <audio id="audio2" src="https://files.catbox.moe/3sitln.mp3"></audio>
 
-  <!-- Titre multicolore -->
   <h1 class="multicolor-title">Nuestros Servicios PRIME MARKET</h1>
 
-  <!-- Liste des services -->
+    <!-- Liste des services -->
   <div class="services-list">
     <a class="service-link" href="vcf.html">1. Generación de VCF</a>
     <a class="service-link" href="numero.html">2. Números en venta</a>
@@ -260,8 +255,8 @@
   27. Generador de Emails Temporales 📬
 </a>
 </div>
-
-  <!-- Retour à l'accueil -->
+    
+   <!-- Retour à l'accueil -->
   <div class="back-home">
     <button class="back-btn" onclick="goHome()">Volver al inicio</button>
   </div>
@@ -292,4 +287,5 @@
     }
   </script>
 </body>
-</html>
+    </html>
+  
